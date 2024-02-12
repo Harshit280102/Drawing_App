@@ -1,0 +1,14 @@
+UNDERSTANDING WEBSOCKETS 
+1. Polling (wastage or overkill) communication of 2 clients through a server will be a overkill because it the client will ask the server weather the server has a message for him or not and what the message is the communication between these clients is a overkill or wastage of http requests
+
+2.  WEBSOCKETS (Solution) clients sends a connection request to the server it is nothing but a simple server request but it tells the server to maintain the connection with the use of upgrade header which upgrades the HTTPS request -> WEBSOCKETS request which now makes the communication Bi-directional 
+
+3.  The WebSocket API is an advanced technology that makes it possible to open a two-way interactive communication session between the user's browser and a server. With this API, you can send messages to a server and receive event-driven responses without having to poll the server for a reply.
+
+4.  WebSocket The primary interface for connecting to a WebSocket server and then sending and receiving data on the connection.
+
+5. CloseEvent The event sent by the WebSocket object when the connection closes.
+
+6. MessageEvent The event sent by the WebSocket object when a message is received from the server.
+
+7. 
