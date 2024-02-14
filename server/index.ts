@@ -8,7 +8,7 @@ import cors from 'cors';
 
 dotenv.config();
 const app: Application = express();
-
+const port = process.env.PORT_NO || 8000;
 
 
 app.use(cors({
@@ -27,17 +27,39 @@ const io = new Server(server,{
     methods:["GET","POST"],
     credentials:true,
   }
-});      //creating a new Socket.io server
+});//creating a new Socket.io server
+
+// const user =false;
+// io.use((socket,next)=>{
+//   if(user) next();
+// })
 
 //Socket io requests handed by socket server
 io.on("connection",(socket)=>{
    socket.emit("welcome",`welcome message from server ${socket.id}`);
 
+   socket.on("join",function(roomName){
+    socket.join(roomName);
+    socket.to(roomName).emit("recived-message",`Hi You Joined The Room ${roomName}`);
+    console.log(`user joined room ${roomName}`)
+   })
 
-   socket.on('message',(data)=>{
-    console.log(`message from user${socket.id}:`,data);
-    // io.emit("recived-message",data);
-    io.to(data.room).emit("recived-message",data.message);
+   socket.on('message',({message,room})=>{
+    if(room === ""){
+      socket.broadcast.emit("recived-message",message);
+    }else{
+      console.log(`message from user${socket.id}:`,room);
+      console.log(socket.rooms.has("room1"));
+      // io.emit("recived-message",data);
+      socket.to(room).emit("recived-message",message);
+    }
+   })
+    
+   socket.on("createRoom",(data)=>{
+   const {name,roomId,userId,host,presenter} =data;
+   console.log(data)
+   socket.join(roomId);
+   socket.emit("userIsJoined",{success:true});
    })
 
 
@@ -52,7 +74,7 @@ io.on("connection",(socket)=>{
 
 
 //Restful Requests handed by express server
-const port = process.env.PORT_NO || 8000;
+
 // app.use(express.static(path.resolve("./public")));
 
 app.get('/', (req: Request, res: Response) => {
