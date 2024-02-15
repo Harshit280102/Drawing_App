@@ -28,3 +28,13 @@ export default {
 - Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
 - Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
 - Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+
+# Give Unique ID
+
+  const uuid = () => {
+    let S4 = () => {
+    return (((1 + Math. random ()) * 0x10000) | 0) .toString(16) .substring(1);
+    };
+    setGeneratedID(S4() +S4() +"-" +S4() +"-" +S4() +"_" +S4() +S4() +S4());
+  };
