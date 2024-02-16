@@ -1,9 +1,13 @@
 import {Outlet} from 'react-router-dom';
 import {Header}  from './Header';
 
-export const Navbar:React.FC =()=>{
+interface Props{
+    authToken:boolean
+  }
+
+export const Navbar:React.FC<Props> =(props:Props)=>{
     return(<div>
-   <Header/>
+   <Header authToken={props.authToken}/>
    <Outlet />
     </div>
     )

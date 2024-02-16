@@ -10,6 +10,6 @@ export default {
       raleway: ["Raleway"],
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
 }
 

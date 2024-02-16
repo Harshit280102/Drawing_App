@@ -1,11 +1,17 @@
 import { Sidebar } from "../Components/Sidebar";
+import { Hero } from "../Layouts/Hero";
 
-export const Home:React.FC =()=>{
+interface Props{
+    authToken:boolean
+}
 
-    const authToken=true;
+export const Home:React.FC<Props> =(props:Props)=>{
+
+    
     return(
-    <section className="">
-    {authToken && <main className="w-[250px]  min-w-[20%] h-full bg-black md:block  hidden">
+    <section>
+    {!props.authToken &&<Hero/>}
+    {props.authToken && <main className="w-[250px] md:block hidden rounded-r-lg -z-40 pb-5 bg-[#1d1d1d] shadow-2xl">
         <Sidebar/>
     </main> }
     </section>
